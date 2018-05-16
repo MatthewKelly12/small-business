@@ -10,28 +10,36 @@ function cards () {
             namePar.textContent = `Employee Name: ${x.firstName} ${x.lastName}`;
             cardDiv.appendChild(namePar);
 
-            let match = x.departmentId;
+            let departMatch = x.departmentId;
             let dept = Database.departments.find(
                 function (id) {
-                    if (match === id.departmentId) {
+                    if (departMatch === id.departmentId) {
                         let deptPar = document.createElement("p");
                          deptPar.textContent = `Department: ${id.name}`;
                         cardDiv.appendChild(deptPar);
                     }
-
-                    console.log(id)
-                    console.log(id.departmentId)
                 });
-
-
-
-
-
-            console.log(x.firstName)
-            console.log(x.lastName)
+                let empComp = Database.employeeComputers.find(
+                    function (empComp) {
+                        if (x.employeeId === empComp.employeeId) {
+                            return empComp.computerId;
+                        }
+                    }
+                )
+                let comp = Database.computers.find(
+                    function (comp) {
+                        if (empComp.computerId === comp.computerId) {
+                            let compNamePar = document.createElement("p");
+                            compNamePar.textContent = `Computer: ${comp.name}`;
+                           cardDiv.appendChild(compNamePar);
+                        }
+                        console.log(comp.computerId)
+                        console.log(comp.name)
+                    }
+                )
         }
     )
 }
-
 cards();
+
 
